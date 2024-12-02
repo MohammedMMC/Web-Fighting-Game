@@ -12,6 +12,8 @@ class Fighter extends Sprite {
      * color: String,
      * imageSrc: String,
      * scale: Number,
+     * health: Number,
+     * damage: Number,
      * framesMax: Number,
      * sprites: {[key: string]:Sprite}
      * }} param0 
@@ -25,6 +27,8 @@ class Fighter extends Sprite {
         framesMax = 1,
         offset = { x: 0, y: 0 },
         sprites,
+        health,
+        damage,
         attackBox = { offset: { x: 0, y: 0 }, width: undefined, height: undefined }
     }) {
         super({ position, imageSrc, scale, framesMax, offset });
@@ -43,7 +47,9 @@ class Fighter extends Sprite {
         };
         this.color = color;
         this.isAttacking = false;
-        this.health = 100;
+        this.health = health;
+        this.maxHealth = health;
+        this.damage = damage;
         this.framesCurrent = 1;
         this.framesElapsed = 0;
         this.framesHold = 5;
@@ -61,8 +67,8 @@ class Fighter extends Sprite {
         this.isAttacking = true;
     }
 
-    takeHit() {
-        this.health -= 20;
+    takeHit(e) {
+        this.health -= e.damage;
 
         if (this.health <= 0) {
             this.switchSprite("death");

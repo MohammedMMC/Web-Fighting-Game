@@ -1,7 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Press Start 2P", sans-serif;
+  color: #fff;
+}
+
+body {
+  background-color: #291d2c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2cm 0;
+}
+
+section.controls {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  width: 1024px;
+  margin-bottom: 1.2cm;
+}
+
+section.controls div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  row-gap: 10px;
+}
+
+section.controls div h1 {
+  margin-bottom: 10px;
+  grid-column: span 2;
+  text-align: center;
+  padding-bottom: 15px;
+  border-bottom: 3px solid #a6a2ad;
+}
+
+section.controls div p {
+  margin-bottom: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+section.controls div p span:nth-child(1) {
+  color: #a6a2ad;
 }
 
 .container {
@@ -10,13 +59,15 @@
 }
 
 .gamestatus {
-  position: absolute;
-  color: #fff;
   display: none;
+  position: absolute;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
+  font-size: xx-large;
+  background-color: rgb(0, 0, 0, 0.2);
+  z-index: 999;
 }
 
 .statusbar {
@@ -31,30 +82,55 @@
 }
 
 .statusbar .timer {
-  background-color: aquamarine;
+  background-color: #199def3f;
+  border: 5px solid #199def99;
+  backdrop-filter: blur(5px);
+  border-radius: 15px;
   width: 100px;
-  height: 100px;
+  height: 70px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: xx-large;
+  z-index: 99;
 }
 
 .statusbar .healthContainer {
-  background-color: orange;
-  height: 30px;
+  background-color: #199def3f;
+  box-shadow: 0 0 0px 6px #199def99;
+  backdrop-filter: blur(5px);
+  height: 25px;
   width: 100%;
+  z-index: 9;
 }
 
 .statusbar .healthContainer:has(.playerHealth) {
   display: flex;
   justify-content: end;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.statusbar .healthContainer:has(.enemyHealth) {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .statusbar .playerHealth,
 .statusbar .enemyHealth {
-  background-color: yellow;
-  height: 30px;
+  height: 100%;
   width: 100%;
+}
+
+.statusbar .playerHealth {
+  background-image: linear-gradient(45deg, #ef3f71, #ef3f3f);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.statusbar .enemyHealth {
+  background-image: linear-gradient(45deg, #ef3f3f, #ef3f71);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }

@@ -9,24 +9,71 @@
 </head>
 
 <body>
+    <section class="controls">
+        <div>
+            <h1>Player 1</h1>
+            <p>
+                <span>W</span>
+                <span>Jump</span>
+            </p>
+            <p>
+                <span>A</span>
+                <span>Move Back</span>
+            </p>
+            <p>
+                <span>SPACE</span>
+                <span>Attack</span>
+            </p>
+            <p>
+                <span>D</span>
+                <span>Move Forward</span>
+            </p>
+        </div>
+        <div>
+            <h1>Player 2</h1>
+            <p>
+                <span>Arrow Up</span>
+                <span>Jump</span>
+            </p>
+            <p>
+                <span>Arrow Left</span>
+                <span>Move Back</span>
+            </p>
+            <p>
+                <span>Arrow Down</span>
+                <span>Attack</span>
+            </p>
+            <p>
+                <span>Arrow Right</span>
+                <span>Move Forward</span>
+            </p>
+        </div>
+    </section>
     <section class="container">
         <div class="statusbar">
             <div class="healthContainer">
                 <div class="playerHealth"></div>
             </div>
-            <div class="timer">10</div>
+            <div class="timer">60</div>
             <div class="healthContainer">
                 <div class="enemyHealth"></div>
             </div>
         </div>
         <div class="gamestatus"></div>
+        <!-- <div class="gameOptions">
+            <button class="btn" id="startGame" onclick="startGame()"> -> Start Game <- </button>
+        </div> -->
         <canvas></canvas>
     </section>
 
-    <script src="./functions.js"></script>
-    <script src="./SpriteClass.js"></script>
-    <script src="./FighterClass.js"></script>
-    <script src="./scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./scripts/playersData.js"></script>
+    <script src="./scripts/functions.js"></script>
+    <script src="./scripts/SpriteClass.js"></script>
+    <script src="./scripts/FighterClass.js"></script>
+    <script src="./scripts/index.js"></script>
 </body>
 
 </html>

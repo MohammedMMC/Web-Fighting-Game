@@ -19,117 +19,25 @@ const KEYS = {
     ArrowRight: { pressed: false },
 }
 
-let timer = 30;
+let timer = 60;
 let timerId;
 
 const background = new Sprite({
     position: { x: 0, y: 0 },
-    imageSrc: "./images/background.png"
+    imageSrc: "../images/background.png"
 });
 
 const shop = new Sprite({
     position: { x: 620, y: 128 },
-    imageSrc: "./images/shop.png",
+    imageSrc: "../images/shop.png",
     scale: 2.75,
     framesMax: 6
 });
 
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-const player = new Fighter({
-    position: { x: 0, y: 0 },
-    velocity: { x: 0, y: 0 },
-    color: "blue",
-    imageSrc: "./images/samuraiMack/Idle.png",
-    framesMax: 8,
-    scale: 2.5,
-    offset: {
-        x: 215,
-        y: 155
-    },
-    sprites: {
-        idle: {
-            imageSrc: "./images/samuraiMack/Idle.png",
-            framesMax: 8
-        },
-        run: {
-            imageSrc: "./images/samuraiMack/Run.png",
-            framesMax: 8
-        },
-        jump: {
-            imageSrc: "./images/samuraiMack/Jump.png",
-            framesMax: 2
-        },
-        fall: {
-            imageSrc: "./images/samuraiMack/Fall.png",
-            framesMax: 2
-        },
-        attack1: {
-            imageSrc: "./images/samuraiMack/Attack1.png",
-            framesMax: 6
-        },
-        takeHit: {
-            imageSrc: "./images/samuraiMack/Take Hit - white silhouette.png",
-            framesMax: 4
-        },
-        death: {
-            imageSrc: "./images/samuraiMack/Death.png",
-            framesMax: 6
-        }
-    },
-    attackBox: {
-        offset: { x: 80, y: 50 },
-        width: 170,
-        height: 50
-    }
-});
-
-const enemy = new Fighter({
-    position: { x: 400, y: 100 },
-    velocity: { x: 0, y: 0 },
-    imageSrc: "./images/kenji/Idle.png",
-    framesMax: 4,
-    scale: 2.5,
-    offset: {
-        x: 215,
-        y: 170
-    },
-    sprites: {
-        idle: {
-            imageSrc: "./images/kenji/Idle.png",
-            framesMax: 4
-        },
-        run: {
-            imageSrc: "./images/kenji/Run.png",
-            framesMax: 8
-        },
-        jump: {
-            imageSrc: "./images/kenji/Jump.png",
-            framesMax: 2
-        },
-        fall: {
-            imageSrc: "./images/kenji/Fall.png",
-            framesMax: 2
-        },
-        attack1: {
-            imageSrc: "./images/kenji/Attack1.png",
-            framesMax: 4
-        },
-        takeHit: {
-            imageSrc: "./images/kenji/Take hit.png",
-            framesMax: 3
-        },
-        death: {
-            imageSrc: "./images/kenji/Death.png",
-            framesMax: 7
-        }
-    },
-    attackBox: {
-        offset: { x: -170, y: 50 },
-        width: 170,
-        height: 50
-    }
-});
+const player = new Fighter(PLAYERS_DATA.samuraiMack);
+const enemy = new Fighter(PLAYERS_DATA.kenji);
 
 function animate() {
     // Requesting Animation Frame
@@ -141,6 +49,8 @@ function animate() {
 
     background.update();
     shop.update();
+    ctx.fillStyle = "rgba(255, 255, 255, 0.15)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     player.update();
     enemy.update();
 
@@ -184,16 +94,20 @@ function animate() {
         player.isAttacking && player.framesCurrent === 4
     ) {
         player.isAttacking = false;
-        enemy.takeHit();
-        enemyHealth.style.width = enemy.health + "%";
+        enemy.takeHit(player);
+        gsap.to(enemyHealth, {
+            width: (enemy.health * 100 / (enemy.maxHealth)) + "%"
+        });
     }
     if (
         rectCollision({ rect1: enemy, rect2: player }) &&
         enemy.isAttacking && enemy.framesCurrent === 2
     ) {
         enemy.isAttacking = false;
-        player.takeHit();
-        playerHealth.style.width = player.health + "%";
+        player.takeHit(enemy);
+        gsap.to(playerHealth, {
+            width: (player.health * 100 / (player.maxHealth)) + "%"
+        });
     }
     // if player misses
     if (player.isAttacking && player.framesCurrent === 4) {
@@ -211,25 +125,26 @@ function animate() {
     }
 }
 
-animate();
-decreaseTimer();
-
 window.addEventListener("keydown", (e) => {
     if (!player.dead) {
         switch (e.key) {
             case 'a':
                 KEYS.a.pressed = true;
                 player.lastKey = e.key;
+                e.preventDefault();
                 break;
             case 'd':
                 KEYS.d.pressed = true;
                 player.lastKey = e.key;
+                e.preventDefault();
                 break;
             case 'w':
                 player.velocity.y = -20;
+                e.preventDefault();
                 break;
             case ' ':
                 player.attack();
+                e.preventDefault();
                 break;
         }
     }
@@ -238,16 +153,20 @@ window.addEventListener("keydown", (e) => {
             case 'ArrowRight':
                 KEYS.ArrowRight.pressed = true;
                 enemy.lastKey = e.key;
+                e.preventDefault();
                 break;
             case 'ArrowLeft':
                 KEYS.ArrowLeft.pressed = true;
                 enemy.lastKey = e.key;
+                e.preventDefault();
                 break;
             case 'ArrowUp':
                 enemy.velocity.y = -20;
+                e.preventDefault();
                 break;
             case 'ArrowDown':
                 enemy.attack();
+                e.preventDefault();
                 break;
         }
     }
@@ -270,3 +189,8 @@ window.addEventListener("keyup", (e) => {
             break;
     }
 });
+
+// function startGame() {
+animate();
+decreaseTimer();
+// }
