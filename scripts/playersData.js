@@ -3,7 +3,7 @@ const PLAYERS_DATA = {
         name: "Kenji",
         position: { x: 400, y: 100 },
         velocity: { x: 0, y: 0 },
-        imageSrc: "../images/kenji/Idle.png",
+        imageSrc: "./images/kenji/Idle.png",
         framesMax: 4,
         scale: 2.5,
         health: 100,
@@ -11,31 +11,31 @@ const PLAYERS_DATA = {
         offset: { x: 215, y: 170 },
         sprites: {
             idle: {
-                imageSrc: "../images/kenji/Idle.png",
+                imageSrc: "./images/kenji/Idle.png",
                 framesMax: 4
             },
             run: {
-                imageSrc: "../images/kenji/Run.png",
+                imageSrc: "./images/kenji/Run.png",
                 framesMax: 8
             },
             jump: {
-                imageSrc: "../images/kenji/Jump.png",
+                imageSrc: "./images/kenji/Jump.png",
                 framesMax: 2
             },
             fall: {
-                imageSrc: "../images/kenji/Fall.png",
+                imageSrc: "./images/kenji/Fall.png",
                 framesMax: 2
             },
             attack1: {
-                imageSrc: "../images/kenji/Attack1.png",
+                imageSrc: "./images/kenji/Attack1.png",
                 framesMax: 4
             },
             takeHit: {
-                imageSrc: "../images/kenji/Take hit.png",
+                imageSrc: "./images/kenji/Take hit.png",
                 framesMax: 3
             },
             death: {
-                imageSrc: "../images/kenji/Death.png",
+                imageSrc: "./images/kenji/Death.png",
                 framesMax: 7
             }
         },
@@ -49,7 +49,7 @@ const PLAYERS_DATA = {
         name: "Samurai Mack",
         position: { x: 0, y: 0 },
         velocity: { x: 0, y: 0 },
-        imageSrc: "../images/samuraiMack/Idle.png",
+        imageSrc: "./images/samuraiMack/Idle.png",
         framesMax: 8,
         scale: 2.5,
         health: 110,
@@ -57,31 +57,31 @@ const PLAYERS_DATA = {
         offset: { x: 215, y: 155 },
         sprites: {
             idle: {
-                imageSrc: "../images/samuraiMack/Idle.png",
+                imageSrc: "./images/samuraiMack/Idle.png",
                 framesMax: 8
             },
             run: {
-                imageSrc: "../images/samuraiMack/Run.png",
+                imageSrc: "./images/samuraiMack/Run.png",
                 framesMax: 8
             },
             jump: {
-                imageSrc: "../images/samuraiMack/Jump.png",
+                imageSrc: "./images/samuraiMack/Jump.png",
                 framesMax: 2
             },
             fall: {
-                imageSrc: "../images/samuraiMack/Fall.png",
+                imageSrc: "./images/samuraiMack/Fall.png",
                 framesMax: 2
             },
             attack1: {
-                imageSrc: "../images/samuraiMack/Attack1.png",
+                imageSrc: "./images/samuraiMack/Attack1.png",
                 framesMax: 6
             },
             takeHit: {
-                imageSrc: "../images/samuraiMack/Take Hit - white silhouette.png",
+                imageSrc: "./images/samuraiMack/Take Hit - white silhouette.png",
                 framesMax: 4
             },
             death: {
-                imageSrc: "../images/samuraiMack/Death.png",
+                imageSrc: "./images/samuraiMack/Death.png",
                 framesMax: 6
             }
         },
