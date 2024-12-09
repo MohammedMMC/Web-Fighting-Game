@@ -36,7 +36,7 @@ const shop = new Sprite({
 
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-const player = new Fighter(PLAYERS_DATA.samuraiMack);
+const player = new Fighter(PLAYERS_DATA.shifu);
 const enemy = new Fighter(PLAYERS_DATA.kenji);
 
 function animate() {
@@ -191,6 +191,6 @@ window.addEventListener("keyup", (e) => {
 });
 
 // function startGame() {
-animate();
-decreaseTimer();
+    animate();
+    decreaseTimer();
 // }
