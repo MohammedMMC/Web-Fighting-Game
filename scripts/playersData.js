@@ -5,10 +5,11 @@ const PLAYERS_DATA = {
         velocity: { x: 0, y: 0 },
         imageSrc: "./images/kenji/Idle.png",
         framesMax: 4,
+        giveHitAt: 3,
         scale: 2.5,
         health: 100,
         damage: 13,
-        offset: { x: 15, y: 170 },
+        offset: { x: 215, y: 170 },
         sprites: {
             idle: {
                 imageSrc: "./images/kenji/Idle.png",
@@ -51,6 +52,7 @@ const PLAYERS_DATA = {
         velocity: { x: 0, y: 0 },
         imageSrc: "./images/samuraiMack/Idle.png",
         framesMax: 8,
+        giveHitAt: 5,
         scale: 2.5,
         health: 110,
         damage: 15,
@@ -97,10 +99,11 @@ const PLAYERS_DATA = {
         velocity: { x: 0, y: 0 },
         imageSrc: "./images/shifu/Idle.png",
         framesMax: 8,
+        giveHitAt: 5,
         scale: 2.5,
         health: 150,
         damage: 10,
-        offset: { x: 15, y: 55 },
+        offset: { x: 130, y: 55 },
         sprites: {
             idle: {
                 imageSrc: "./images/shifu/Idle.png",
@@ -133,7 +136,101 @@ const PLAYERS_DATA = {
         },
         attackBox: {
             offset: { x: 0, y: 50 },
-            width: 60,
+            width: 175,
+            height: 50
+        }
+    },
+    huntress1: {
+        name: "Huntress",
+        position: { x: 0, y: 0 },
+        velocity: { x: 0, y: 0 },
+        imageSrc: "./images/huntress/Idle.png",
+        framesMax: 8,
+        giveHitAt: 4,
+        scale: 2.8,
+        health: 100,
+        damage: 12,
+        offset: { x: 150, y: 120 },
+        sprites: {
+            idle: {
+                imageSrc: "./images/huntress/Idle.png",
+                framesMax: 8
+            },
+            run: {
+                imageSrc: "./images/huntress/Run.png",
+                framesMax: 8
+            },
+            jump: {
+                imageSrc: "./images/huntress/Jump.png",
+                framesMax: 2
+            },
+            fall: {
+                imageSrc: "./images/huntress/Fall.png",
+                framesMax: 2
+            },
+            attack1: {
+                imageSrc: "./images/huntress/Attack1.png",
+                framesMax: 5
+            },
+            takeHit: {
+                imageSrc: "./images/huntress/Take Hit.png",
+                framesMax: 3
+            },
+            death: {
+                imageSrc: "./images/huntress/Death.png",
+                framesMax: 8
+            }
+        },
+        attackBox: {
+            offset: { x: 10, y: 50 },
+            width: 175,
+            height: 50
+        }
+    },
+    huntress2: {
+        name: "Huntress 2",
+        position: { x: 0, y: 0 },
+        velocity: { x: 0, y: 0 },
+        imageSrc: "./images/huntress2/Idle.png",
+        framesMax: 10,
+        giveHitAt: 4,
+        scale: 2.65,
+        health: 80,
+        damage: 12,
+        offset: { x: 100, y: 30 },
+        sprites: {
+            idle: {
+                imageSrc: "./images/huntress2/Idle.png",
+                framesMax: 10
+            },
+            run: {
+                imageSrc: "./images/huntress2/Run.png",
+                framesMax: 8
+            },
+            jump: {
+                imageSrc: "./images/huntress2/Jump.png",
+                framesMax: 2
+            },
+            fall: {
+                imageSrc: "./images/huntress2/Fall.png",
+                framesMax: 2
+            },
+            attack1: {
+                imageSrc: "./images/huntress2/Attack.png",
+                framesMax: 6
+            },
+            takeHit: {
+                imageSrc: "./images/huntress2/Get Hit.png",
+                framesMax: 3
+            },
+            death: {
+                imageSrc: "./images/huntress2/Death.png",
+                framesMax: 10
+            }
+        },
+        attackBox: {
+            offset: { x: 0, y: 50 },
+            width: 350,
             height: 50
         }
     }

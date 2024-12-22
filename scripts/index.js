@@ -36,7 +36,7 @@ const shop = new Sprite({
 
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-const player = new Fighter(PLAYERS_DATA.shifu);
+const player = new Fighter(PLAYERS_DATA.huntress2);
 const enemy = new Fighter(PLAYERS_DATA.kenji);
 
 function animate() {
@@ -91,7 +91,7 @@ function animate() {
     // Detect for collision & enemy gets hit
     if (
         rectCollision({ rect1: player, rect2: enemy }) &&
-        player.isAttacking && player.framesCurrent === 4
+        player.isAttacking && player.framesCurrent === enemy.giveHitAt - 1
     ) {
         player.isAttacking = false;
         enemy.takeHit(player);
@@ -101,7 +101,7 @@ function animate() {
     }
     if (
         rectCollision({ rect1: enemy, rect2: player }) &&
-        enemy.isAttacking && enemy.framesCurrent === 2
+        enemy.isAttacking && enemy.framesCurrent === player.giveHitAt - 1
     ) {
         enemy.isAttacking = false;
         player.takeHit(enemy);
@@ -110,10 +110,10 @@ function animate() {
         });
     }
     // if player misses
-    if (player.isAttacking && player.framesCurrent === 4) {
+    if (player.isAttacking && player.framesCurrent === enemy.giveHitAt - 1) {
         player.isAttacking = false;
     }
-    if (enemy.isAttacking && enemy.framesCurrent === 2) {
+    if (enemy.isAttacking && enemy.framesCurrent === player.giveHitAt - 1) {
         enemy.isAttacking = false;
     }
 
@@ -191,6 +191,6 @@ window.addEventListener("keyup", (e) => {
 });
 
 // function startGame() {
-    animate();
-    decreaseTimer();
+animate();
+decreaseTimer();
 // }

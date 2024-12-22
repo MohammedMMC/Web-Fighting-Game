@@ -29,7 +29,8 @@ class Fighter extends Sprite {
         sprites,
         health,
         damage,
-        attackBox = { offset: { x: 0, y: 0 }, width: undefined, height: undefined }
+        attackBox = { offset: { x: 0, y: 0 }, width: undefined, height: undefined },
+        giveHitAt
     }) {
         super({ position, imageSrc, scale, framesMax, offset });
         this.velocity = velocity;
@@ -55,6 +56,7 @@ class Fighter extends Sprite {
         this.framesHold = 5;
         this.sprites = sprites;
         this.dead = false;
+        this.giveHitAt = giveHitAt || 4;
 
         for (const sprite in this.sprites) {
             sprites[sprite].image = new Image();
@@ -82,8 +84,10 @@ class Fighter extends Sprite {
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
         this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
 
+        // ~~ Debugging ~~
+        // ctx.fillStyle = "red";
         // ctx.fillRect(
-        //     this.attackBox.position.x,
+        //     this.attackBox.position.x - this.attackBox.offset.x,
         //     this.attackBox.position.y,
         //     this.attackBox.width,
         //     this.attackBox.height
