@@ -1,4 +1,5 @@
 function decreaseTimer() {
+    if (!startTheGame) return;
     if (timer > 0) {
         timerId = setTimeout(decreaseTimer, 1000);
         timer--;

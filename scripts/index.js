@@ -5,6 +5,11 @@ const gameTimer = document.querySelector(".timer");
 const gameStatus = document.querySelector(".gamestatus");
 const playerHealth = document.querySelector(".playerHealth");
 const enemyHealth = document.querySelector(".enemyHealth");
+const playersSecletion = document.querySelector(".playersSecletion");
+const playersSecletionTitle = document.querySelector(".playersSecletion h2");
+
+// Start Var.
+let startTheGame = false;
 
 // Canvas Sie
 canvas.width = 1024;
@@ -36,12 +41,14 @@ const shop = new Sprite({
 
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-const player = new Fighter(PLAYERS_DATA.huntress2);
-const enemy = new Fighter(PLAYERS_DATA.kenji);
+let player = new Fighter(PLAYERS_DATA.samuraiMack);
+let enemy = new Fighter(PLAYERS_DATA.kenji);
 
 function animate() {
     // Requesting Animation Frame
     window.requestAnimationFrame(animate);
+    // Close the loop if the game is not started!
+    if (!startTheGame) return;
 
     // Clearing The Background and Updating The Players.
     ctx.fillStyle = "black";
@@ -126,6 +133,38 @@ function animate() {
 }
 
 window.addEventListener("keydown", (e) => {
+    if (!startTheGame) {
+        switch (e.key) {
+            case 'a':
+                e.preventDefault();
+                choosePlayer(-1, false);
+                break;
+            case 'd':
+                e.preventDefault();
+                choosePlayer(1, false);
+                break;
+            case ' ':
+                e.preventDefault();
+                toggleSelectPlayer(false);
+                break;
+        }
+        switch (e.key) {
+            case 'ArrowRight':
+                e.preventDefault();
+                choosePlayer(-1, true);
+                break;
+            case 'ArrowLeft':
+                e.preventDefault();
+                choosePlayer(1, true);
+                break;
+            case 'ArrowDown':
+                e.preventDefault();
+                toggleSelectPlayer(true);
+                break;
+        }
+    }
+
+
     if (!player.dead) {
         switch (e.key) {
             case 'a':
@@ -190,7 +229,72 @@ window.addEventListener("keyup", (e) => {
     }
 });
 
-// function startGame() {
 animate();
-decreaseTimer();
-// }
+function startGame() {
+    playersSecletion.style.display = "none";
+    startTheGame = true;
+    decreaseTimer();
+}
+
+let startingSec = 3;
+let statingGameTimeoutInterval = null;
+
+function toggleSelectPlayer(secNDfighter) {
+    const all1Players = [...playersSecletion.querySelectorAll("#player1fighters .players2Select")];
+    const all2Players = [...playersSecletion.querySelectorAll("#player2fighters .players2Select")];
+    if (!secNDfighter) {
+        const isSelect1 = !all1Players.map(el => el.classList.contains("selected")).includes(true);
+        all1Players.forEach(el => el.classList.contains("active") ? el.classList[isSelect1 ? "add" : "remove"]("selected") : null);
+    } else {
+        const isSelect2 = !all2Players.map(el => el.classList.contains("selected")).includes(true);
+        all2Players.forEach(el => el.classList.contains("active") ? el.classList[isSelect2 ? "add" : "remove"]("selected") : null);
+    }
+
+    const isSelect1 = !all1Players.map(el => el.classList.contains("selected")).includes(true);
+    const isSelect2 = !all2Players.map(el => el.classList.contains("selected")).includes(true);
+
+    const selected1FighterName = all1Players.filter(el => el.classList.contains("selected"))[0].getAttribute("--data-fighterName");
+    const selected2FighterName = all2Players.filter(el => el.classList.contains("selected"))[0].getAttribute("--data-fighterName");
+
+    if (!isSelect1 && !isSelect2) {
+        startingSec = 3;
+        statingGameTimeoutInterval = setInterval(() => {
+            playersSecletionTitle.textContent = `Starting In ${startingSec}..`;
+            startingSec--;
+            if (startingSec <= 0) {
+                player = new Fighter(PLAYERS_DATA[selected1FighterName]);
+                enemy = new Fighter(PLAYERS_DATA[selected2FighterName]);
+                startGame();
+                clearInterval(statingGameTimeoutInterval);
+                playersSecletionTitle.textContent = "Started!";
+            }
+        }, 1000);
+    } else {
+        playersSecletionTitle.textContent = "Select Your Player!";
+        clearInterval(statingGameTimeoutInterval);
+    }
+}
+
+function choosePlayer(count, secNDfighter) {
+    if (!secNDfighter) {
+        const all1Players = [...playersSecletion.querySelectorAll("#player1fighters .players2Select")];
+        if (all1Players.map(el => el.classList.contains("selected")).includes(true)) return;
+        let selected1Index = all1Players.findIndex(el => el.classList.contains("active"));
+        if (!selected1Index || selected1Index === -1) selected1Index = 0;
+        selected1Index += count;
+        if (selected1Index < 0) selected1Index = all1Players.length - 1;
+        all1Players.forEach(el => el.classList.remove("active"));
+        if (all1Players.length <= selected1Index) selected1Index = 0;
+        all1Players[selected1Index]?.classList?.add("active");
+    } else {
+        const all2Players = [...playersSecletion.querySelectorAll("#player2fighters .players2Select")];
+        if (all2Players.map(el => el.classList.contains("selected")).includes(true)) return;
+        let selected2Index = all2Players.findIndex(el => el.classList.contains("active"));
+        if (!selected2Index || selected2Index === -1) selected2Index = 0;
+        selected2Index += count;
+        if (selected2Index < 0) selected2Index = all2Players.length - 1;
+        all2Players.forEach(el => el.classList.remove("active"));
+        if (all2Players.length <= selected2Index) selected2Index = 0;
+        all2Players[selected2Index]?.classList?.add("active");
+    }
+}
