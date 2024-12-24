@@ -147,28 +147,74 @@ section.controls div p span:nth-child(1) {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   padding: 2cm 1cm;
 }
 
-.playersSecletion h2 {
-  margin-bottom: 1.5cm;
+.playersSecletion div.playersSelectedInfo {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.playersSecletion > div {
+.playersSecletion div.playersSelectedInfo > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.playersSecletion div.playersSelectedInfo > div > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.playersSecletion div.playersSelectedInfo > div > div span {
+  position: relative;
+  width: 200px;
+  background-color: #ffffff1a;
+  border: 2px solid #ffffff88;
+  border-radius: 5px;
+  height: 20px;
+  overflow: hidden;
+}
+
+.playersSecletion div.playersSelectedInfo > div > div span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--percent);
+  height: 100%;
+  z-index: 1;
+  background-color: #ffffffcc;
+  transition: width 250ms ease-in;
+}
+
+.playersSecletion h2 {
+  margin-bottom: 0.2cm;
+}
+
+.playersSecletion div.playersSelectionContainer {
   display: flex;
   width: 100%;
   justify-content: space-between;
+  margin-bottom: 1cm;
   gap: 1cm;
 }
 
-.playersSecletion > div > div {
+.playersSecletion div.playersSelectionContainer > div {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 30px;
 }
 
-.playersSecletion > div > div > div {
+.playersSecletion div.playersSelectionContainer > div > div {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

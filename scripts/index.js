@@ -125,7 +125,6 @@ function animate() {
     }
 
 
-
     // End Game if dead :)
     if (enemy.health <= 0 || player.health <= 0) {
         determineWinner({ player, enemy, timerId });
@@ -163,7 +162,6 @@ window.addEventListener("keydown", (e) => {
                 break;
         }
     }
-
 
     if (!player.dead) {
         switch (e.key) {
@@ -230,11 +228,15 @@ window.addEventListener("keyup", (e) => {
 });
 
 animate();
+choosePlayer(0);
+choosePlayer(0, true);
 function startGame() {
     playersSecletion.style.display = "none";
     startTheGame = true;
     decreaseTimer();
 }
+
+// Main Menu Functions
 
 let startingSec = 3;
 let statingGameTimeoutInterval = null;
@@ -286,6 +288,8 @@ function choosePlayer(count, secNDfighter) {
         all1Players.forEach(el => el.classList.remove("active"));
         if (all1Players.length <= selected1Index) selected1Index = 0;
         all1Players[selected1Index]?.classList?.add("active");
+        const selected1FighterName = all1Players.filter(el => el.classList.contains("active"))[0].getAttribute("--data-fighterName");
+        changePlayersInfo(PLAYERS_DATA[selected1FighterName]);
     } else {
         const all2Players = [...playersSecletion.querySelectorAll("#player2fighters .players2Select")];
         if (all2Players.map(el => el.classList.contains("selected")).includes(true)) return;
@@ -296,5 +300,30 @@ function choosePlayer(count, secNDfighter) {
         all2Players.forEach(el => el.classList.remove("active"));
         if (all2Players.length <= selected2Index) selected2Index = 0;
         all2Players[selected2Index]?.classList?.add("active");
+        const selected2FighterName = all2Players.filter(el => el.classList.contains("active"))[0].getAttribute("--data-fighterName");
+        changePlayersInfo(PLAYERS_DATA[selected2FighterName], true);
     }
+}
+
+function changePlayersInfo(playerData, secNDfighter = false) {
+    if (!playerData) return;
+    const playerInfoElement = document.querySelector(`.playersSecletion .player${secNDfighter ? "2" : "1"}Info`);
+
+    const healthSpan = playerInfoElement.querySelector("div:nth-child(1) > span");
+    const powerSpan = playerInfoElement.querySelector("div:nth-child(2) > span");
+    const rangeSpan = playerInfoElement.querySelector("div:nth-child(3) > span");
+
+    let gameMaxHealth = 0;
+    let gameMaxPower = 0;
+    let gameMaxRange = 0;
+
+    for (const ftr in PLAYERS_DATA) {
+        if (gameMaxHealth < PLAYERS_DATA[ftr].health) gameMaxHealth = PLAYERS_DATA[ftr].health;
+        if (gameMaxPower < PLAYERS_DATA[ftr].damage) gameMaxPower = PLAYERS_DATA[ftr].damage;
+        if (gameMaxRange < PLAYERS_DATA[ftr].attackBox.width) gameMaxRange = PLAYERS_DATA[ftr].attackBox.width;
+    }
+
+    healthSpan.style.setProperty('--percent', `${Math.round((100 * playerData.health) / gameMaxHealth)}%`);
+    powerSpan.style.setProperty('--percent', `${Math.round((100 * playerData.damage) / gameMaxPower)}%`);
+    rangeSpan.style.setProperty('--percent', `${Math.round((100 * playerData.attackBox.width) / gameMaxRange)}%`);
 }
