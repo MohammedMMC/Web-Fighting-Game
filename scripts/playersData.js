@@ -5,7 +5,7 @@ const PLAYERS_DATA = {
         velocity: { x: 0, y: 0 },
         imageSrc: "./images/kenji/Idle.png",
         framesMax: 4,
-        giveHitAt: 3,
+        giveHitAt: 2,
         scale: 2.5,
         health: 100,
         damage: 13,

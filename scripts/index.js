@@ -98,7 +98,7 @@ function animate() {
     // Detect for collision & enemy gets hit
     if (
         rectCollision({ rect1: player, rect2: enemy }) &&
-        player.isAttacking && player.framesCurrent === enemy.giveHitAt - 1
+        player.isAttacking && player.framesCurrent === player.giveHitAt
     ) {
         player.isAttacking = false;
         enemy.takeHit(player);
@@ -108,7 +108,7 @@ function animate() {
     }
     if (
         rectCollision({ rect1: enemy, rect2: player }) &&
-        enemy.isAttacking && enemy.framesCurrent === player.giveHitAt - 1
+        enemy.isAttacking && enemy.framesCurrent === enemy.giveHitAt
     ) {
         enemy.isAttacking = false;
         player.takeHit(enemy);
@@ -117,10 +117,10 @@ function animate() {
         });
     }
     // if player misses
-    if (player.isAttacking && player.framesCurrent === enemy.giveHitAt - 1) {
+    if (player.isAttacking && player.framesCurrent === player.giveHitAt) {
         player.isAttacking = false;
     }
-    if (enemy.isAttacking && enemy.framesCurrent === player.giveHitAt - 1) {
+    if (enemy.isAttacking && enemy.framesCurrent === enemy.giveHitAt) {
         enemy.isAttacking = false;
     }
 
