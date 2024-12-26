@@ -312,18 +312,22 @@ function changePlayersInfo(playerData, secNDfighter = false) {
     const healthSpan = playerInfoElement.querySelector("div:nth-child(1) > span");
     const powerSpan = playerInfoElement.querySelector("div:nth-child(2) > span");
     const rangeSpan = playerInfoElement.querySelector("div:nth-child(3) > span");
+    const speedSpan = playerInfoElement.querySelector("div:nth-child(4) > span");
 
     let gameMaxHealth = 0;
     let gameMaxPower = 0;
     let gameMaxRange = 0;
+    let gameMaxSpeed = Infinity;
 
     for (const ftr in PLAYERS_DATA) {
         if (gameMaxHealth < PLAYERS_DATA[ftr].health) gameMaxHealth = PLAYERS_DATA[ftr].health;
         if (gameMaxPower < PLAYERS_DATA[ftr].damage) gameMaxPower = PLAYERS_DATA[ftr].damage;
         if (gameMaxRange < PLAYERS_DATA[ftr].attackBox.width) gameMaxRange = PLAYERS_DATA[ftr].attackBox.width;
+        if (gameMaxSpeed > PLAYERS_DATA[ftr].giveHitAt) gameMaxSpeed = PLAYERS_DATA[ftr].giveHitAt;
     }
 
     healthSpan.style.setProperty('--percent', `${Math.round((100 * playerData.health) / gameMaxHealth)}%`);
     powerSpan.style.setProperty('--percent', `${Math.round((100 * playerData.damage) / gameMaxPower)}%`);
     rangeSpan.style.setProperty('--percent', `${Math.round((100 * playerData.attackBox.width) / gameMaxRange)}%`);
+    speedSpan.style.setProperty('--percent', `${Math.round((100 * gameMaxSpeed) / playerData.giveHitAt)}%`);
 }

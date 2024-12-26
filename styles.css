@@ -103,22 +103,24 @@ section.controls div p span:nth-child(1) {
   height: 25px;
   width: 100%;
   z-index: 9;
+  display: flex;
 }
 
 .statusbar .healthContainer:has(.playerHealth) {
-  display: flex;
-  justify-content: end;
+  justify-content: start;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
 
 .statusbar .healthContainer:has(.enemyHealth) {
+  justify-content: end;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
 
 .statusbar .playerHealth,
 .statusbar .enemyHealth {
+  position: relative;
   height: 100%;
   width: 100%;
 }
@@ -133,6 +135,28 @@ section.controls div p span:nth-child(1) {
   background-image: linear-gradient(45deg, #ef3f3f, #ef3f71);
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
+}
+
+.statusbar .playerHealth::after,
+.statusbar .enemyHealth::after {
+  content: "";
+  position: absolute;
+  top: -20px;
+  z-index: 1;
+  background-image: url("./images/heart.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 60px;
+  width: 60px;
+}
+
+.statusbar .playerHealth::after {
+  left: -16px;
+}
+
+.statusbar .enemyHealth::after {
+  right: -16px;
 }
 
 /* Player Selection */
@@ -219,6 +243,15 @@ section.controls div p span:nth-child(1) {
   flex-direction: row;
   flex-wrap: wrap;
   gap: 15px;
+}
+
+.playersSecletion div.playersSelectionContainer > div:nth-of-type(2) > div {
+  justify-content: end;
+}
+
+.playersSecletion div.playersSelectionContainer > div:nth-of-type(2) h3 {
+  justify-content: end;
+  text-align: end;
 }
 
 .players2Select {

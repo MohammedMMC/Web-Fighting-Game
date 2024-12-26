@@ -10,6 +10,7 @@ Engage in thrilling battles with a friend using intuitive controls and daynamic 
 - Two-player mode for competitive play.
 - Smooth animations using HTML Canvas API.
 - Intuitive controls for jumping, moving, and attacking.
+- Include character selection.
 
 ## Controls
 
@@ -34,15 +35,15 @@ Engage in thrilling battles with a friend using intuitive controls and daynamic 
 ## How to play
 
 1. Open the game in your browser.
-2. Player 1 uses the **W, A, D, and SPACE** keys to control their character.
-3. Player 2 uses the **Arrow Keys** to control their character.
-4. Fight your opponent until one player's health bar is depleted.
+2. Select your character.
+3. Player 1 uses the **W, A, D, and SPACE** keys to control their character.
+4. Player 2 uses the **Arrow Keys** to control their character.
+5. Fight your opponent until one player's health bar is depleted.
 
 ## Future Improvements
 
 - Add AI opponents for single-player mode.
 - Implement special moves and combos.
-- Include character selection and themed arenas.
 
 ## 🚀 Play Now
 

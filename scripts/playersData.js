@@ -1,7 +1,7 @@
 const PLAYERS_DATA = {
     kenji: {
         name: "Kenji",
-        position: { x: 400, y: 100 },
+        position: { x: 900, y: 100 },
         velocity: { x: 0, y: 0 },
         imageSrc: "./images/kenji/Idle.png",
         framesMax: 4,
@@ -48,7 +48,7 @@ const PLAYERS_DATA = {
     },
     samuraiMack: {
         name: "Samurai Mack",
-        position: { x: 0, y: 0 },
+        position: { x: 80, y: 0 },
         velocity: { x: 0, y: 0 },
         imageSrc: "./images/samuraiMack/Idle.png",
         framesMax: 8,
@@ -95,7 +95,7 @@ const PLAYERS_DATA = {
     },
     shifu: {
         name: "Shifu",
-        position: { x: 0, y: 0 },
+        position: { x: 80, y: 0 },
         velocity: { x: 0, y: 0 },
         imageSrc: "./images/shifu/Idle.png",
         framesMax: 8,
@@ -142,7 +142,7 @@ const PLAYERS_DATA = {
     },
     huntress1: {
         name: "Huntress",
-        position: { x: 0, y: 0 },
+        position: { x: 80, y: 0 },
         velocity: { x: 0, y: 0 },
         imageSrc: "./images/huntress/Idle.png",
         framesMax: 8,
@@ -189,7 +189,7 @@ const PLAYERS_DATA = {
     },
     huntress2: {
         name: "Huntress 2",
-        position: { x: 0, y: 0 },
+        position: { x: 80, y: 0 },
         velocity: { x: 0, y: 0 },
         imageSrc: "./images/huntress2/Idle.png",
         framesMax: 10,
