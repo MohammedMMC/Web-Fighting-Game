@@ -5,6 +5,10 @@ Engage in thrilling battles with a friend using intuitive controls and daynamic 
 
 ![Preview Image](https://github.com/MohammedMMC/Web-Fighting-Game/blob/main/preview.png?raw=true)
 
+### 🚀 Play Now
+
+Play the game live [here](https://mohammedmmc.github.io/Web-Fighting-Game/).
+
 ## Features
 
 - Two-player mode for competitive play.
@@ -44,7 +48,16 @@ Engage in thrilling battles with a friend using intuitive controls and daynamic 
 
 - Add AI opponents for single-player mode.
 - Implement special moves and combos.
+- Add multiplayer mode for online play.
+- Enable character customization.
+- Implement leaderboards to track high scores and player rankings.
+- Add achievements for players to unlock.
+- Introduce new characters with unique abilities and moves.
+- Provide a training mode for players to practice.
+- Create dynamic and interactive environments.
+- Enhance the game with sound effects and background music.
+- Add power-ups for temporary advantages during battles.
 
-## 🚀 Play Now
+## License
 
-Play the game live [here](https://mohammedmmc.github.io/Web-Fighting-Game/).
+This project is licensed under the MIT License.
