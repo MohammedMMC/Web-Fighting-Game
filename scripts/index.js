@@ -255,14 +255,13 @@ function toggleSelectPlayer(secNDfighter) {
     const isSelect1 = !all1Players.map(el => el.classList.contains("selected")).includes(true);
     const isSelect2 = !all2Players.map(el => el.classList.contains("selected")).includes(true);
 
-    const selected1FighterName = all1Players.filter(el => el.classList.contains("selected"))[0].getAttribute("--data-fighterName");
-    const selected2FighterName = all2Players.filter(el => el.classList.contains("selected"))[0].getAttribute("--data-fighterName");
+    const selected1FighterName = all1Players.filter(el => el.classList.contains("selected"))[0]?.getAttribute("--data-fighterName");
+    const selected2FighterName = all2Players.filter(el => el.classList.contains("selected"))[0]?.getAttribute("--data-fighterName");
 
     if (!isSelect1 && !isSelect2) {
         startingSec = 3;
         statingGameTimeoutInterval = setInterval(() => {
             playersSecletionTitle.textContent = `Starting In ${startingSec}..`;
-            startingSec--;
             if (startingSec <= 0) {
                 player = new Fighter(PLAYERS_DATA[selected1FighterName]);
                 enemy = new Fighter(PLAYERS_DATA[selected2FighterName]);
@@ -270,10 +269,11 @@ function toggleSelectPlayer(secNDfighter) {
                 clearInterval(statingGameTimeoutInterval);
                 playersSecletionTitle.textContent = "Started!";
             }
+            startingSec--;
         }, 1000);
     } else {
-        playersSecletionTitle.textContent = "Select Your Player!";
         clearInterval(statingGameTimeoutInterval);
+        playersSecletionTitle.textContent = "Select Your Player!";
     }
 }
 
