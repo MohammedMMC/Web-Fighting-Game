@@ -58,6 +58,10 @@ Play the game live [here](https://mohammedmmc.github.io/Web-Fighting-Game/).
 - Enhance the game with sound effects and background music.
 - Add power-ups for temporary advantages during battles.
 
+### Thanks
+
+I have taken the characters from [luizmelo.itch.io](https://luizmelo.itch.io/)
+
 ## License
 
 This project is licensed under the MIT License.
