@@ -23,6 +23,15 @@ class Sprite {
     }
 
     draw() {
+        // ~~ Debugging ~~
+        // ctx.fillStyle = "green";
+        // ctx.fillRect(
+        //     this.position.x - this.offset.x,
+        //     this.position.y - this.offset.y,
+        //     (this.image.width / this.framesMax) * this.scale,
+        //     this.image.height * this.scale
+        // );
+        // ~~ End of Debugging ~~
         ctx.drawImage(
             this.image,
             (this.framesCurrent - 1) * (this.image.width / this.framesMax),

@@ -41,8 +41,12 @@ const shop = new Sprite({
 
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-let player = new Fighter(PLAYERS_DATA.samuraiMack);
-let enemy = new Fighter(PLAYERS_DATA.kenji);
+let player = new Fighter(PLAYERS_DATA.samurai);
+let enemy = new Fighter({
+    ...PLAYERS_DATA.genji,
+    faceDir: -1,
+    position: { x: 850, y: PLAYERS_DATA.genji.position.y }
+});
 
 function animate() {
     // Requesting Animation Frame
@@ -64,11 +68,13 @@ function animate() {
     // Player Movement
     player.velocity.x = 0;
     if (KEYS.a.pressed && player.lastKey === 'a') {
-        player.switchSprite('run');
         player.velocity.x = -5;
-    } else if (KEYS.d.pressed && player.lastKey === 'd') {
+        player.faceDir = -1;
         player.switchSprite('run');
+    } else if (KEYS.d.pressed && player.lastKey === 'd') {
         player.velocity.x = 5;
+        player.faceDir = 1;
+        player.switchSprite('run');
     } else {
         player.switchSprite('idle');
     }
@@ -82,9 +88,11 @@ function animate() {
     enemy.velocity.x = 0;
     if (KEYS.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
         enemy.velocity.x = -5;
+        enemy.faceDir = -1;
         enemy.switchSprite('run');
     } else if (KEYS.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
         enemy.velocity.x = 5;
+        enemy.faceDir = 1;
         enemy.switchSprite('run');
     } else {
         enemy.switchSprite('idle');
@@ -132,8 +140,12 @@ function animate() {
 }
 
 window.addEventListener("keydown", (e) => {
+    console.log(e);
+
+    const pressedKey = e.key.toLowerCase();
+
     if (!startTheGame) {
-        switch (e.key) {
+        switch (pressedKey) {
             case 'a':
                 e.preventDefault();
                 choosePlayer(-1, false);
@@ -147,16 +159,16 @@ window.addEventListener("keydown", (e) => {
                 toggleSelectPlayer(false);
                 break;
         }
-        switch (e.key) {
-            case 'ArrowRight':
+        switch (pressedKey) {
+            case 'ArrowRight'.toLowerCase():
                 e.preventDefault();
                 choosePlayer(-1, true);
                 break;
-            case 'ArrowLeft':
+            case 'ArrowLeft'.toLowerCase():
                 e.preventDefault();
                 choosePlayer(1, true);
                 break;
-            case 'ArrowDown':
+            case 'ArrowDown'.toLowerCase():
                 e.preventDefault();
                 toggleSelectPlayer(true);
                 break;
@@ -164,15 +176,15 @@ window.addEventListener("keydown", (e) => {
     }
 
     if (!player.dead) {
-        switch (e.key) {
+        switch (pressedKey) {
             case 'a':
                 KEYS.a.pressed = true;
-                player.lastKey = e.key;
+                player.lastKey = 'a';
                 e.preventDefault();
                 break;
             case 'd':
                 KEYS.d.pressed = true;
-                player.lastKey = e.key;
+                player.lastKey = 'd';
                 e.preventDefault();
                 break;
             case 'w':
@@ -186,22 +198,22 @@ window.addEventListener("keydown", (e) => {
         }
     }
     if (!enemy.dead) {
-        switch (e.key) {
-            case 'ArrowRight':
+        switch (pressedKey) {
+            case 'ArrowRight'.toLowerCase():
                 KEYS.ArrowRight.pressed = true;
-                enemy.lastKey = e.key;
+                enemy.lastKey = 'ArrowRight';
                 e.preventDefault();
                 break;
-            case 'ArrowLeft':
+            case 'ArrowLeft'.toLowerCase():
                 KEYS.ArrowLeft.pressed = true;
-                enemy.lastKey = e.key;
+                enemy.lastKey = 'ArrowLeft';
                 e.preventDefault();
                 break;
-            case 'ArrowUp':
+            case 'ArrowUp'.toLowerCase():
                 enemy.velocity.y = -20;
                 e.preventDefault();
                 break;
-            case 'ArrowDown':
+            case 'ArrowDown'.toLowerCase():
                 enemy.attack();
                 e.preventDefault();
                 break;
@@ -211,123 +223,45 @@ window.addEventListener("keydown", (e) => {
 });
 
 window.addEventListener("keyup", (e) => {
-    switch (e.key) {
+    const pressedKey = e.key.toLowerCase();
+
+    switch (pressedKey) {
         case 'a':
             KEYS.a.pressed = false;
             break;
         case 'd':
             KEYS.d.pressed = false;
             break;
-        case 'ArrowRight':
+        case 'ArrowRight'.toLowerCase():
             KEYS.ArrowRight.pressed = false;
             break;
-        case 'ArrowLeft':
+        case 'ArrowLeft'.toLowerCase():
             KEYS.ArrowLeft.pressed = false;
             break;
     }
 });
 
-animate();
-choosePlayer(0);
-choosePlayer(0, true);
 function startGame() {
     playersSecletion.style.display = "none";
     startTheGame = true;
     decreaseTimer();
 }
 
-// Main Menu Functions
+// Load fighters (For Selection)
+const newFighterView = (key, {name, viewSrc}) => `
+<div class="players2Select" --data-fighterName="${key}"
+style="--fighterViewURL: url('${viewSrc}');">${name}</div>
+`;
 
-let startingSec = 3;
-let statingGameTimeoutInterval = null;
+const player1Fighters = document.querySelector("#player1fighters");
+const player2Fighters = document.querySelector("#player2fighters");
 
-function toggleSelectPlayer(secNDfighter) {
-    const all1Players = [...playersSecletion.querySelectorAll("#player1fighters .players2Select")];
-    const all2Players = [...playersSecletion.querySelectorAll("#player2fighters .players2Select")];
-    if (!secNDfighter) {
-        const isSelect1 = !all1Players.map(el => el.classList.contains("selected")).includes(true);
-        all1Players.forEach(el => el.classList.contains("active") ? el.classList[isSelect1 ? "add" : "remove"]("selected") : null);
-    } else {
-        const isSelect2 = !all2Players.map(el => el.classList.contains("selected")).includes(true);
-        all2Players.forEach(el => el.classList.contains("active") ? el.classList[isSelect2 ? "add" : "remove"]("selected") : null);
-    }
-
-    const isSelect1 = !all1Players.map(el => el.classList.contains("selected")).includes(true);
-    const isSelect2 = !all2Players.map(el => el.classList.contains("selected")).includes(true);
-
-    const selected1FighterName = all1Players.filter(el => el.classList.contains("selected"))[0]?.getAttribute("--data-fighterName");
-    const selected2FighterName = all2Players.filter(el => el.classList.contains("selected"))[0]?.getAttribute("--data-fighterName");
-
-    if (!isSelect1 && !isSelect2) {
-        startingSec = 3;
-        statingGameTimeoutInterval = setInterval(() => {
-            playersSecletionTitle.textContent = `Starting In ${startingSec}..`;
-            if (startingSec <= 0) {
-                player = new Fighter(PLAYERS_DATA[selected1FighterName]);
-                enemy = new Fighter(PLAYERS_DATA[selected2FighterName]);
-                startGame();
-                clearInterval(statingGameTimeoutInterval);
-                playersSecletionTitle.textContent = "Started!";
-            }
-            startingSec--;
-        }, 1000);
-    } else {
-        clearInterval(statingGameTimeoutInterval);
-        playersSecletionTitle.textContent = "Select Your Player!";
-    }
+for (const key in PLAYERS_DATA) {
+    player1Fighters.innerHTML += newFighterView(key, PLAYERS_DATA[key]);
+    player2Fighters.innerHTML += newFighterView(key, PLAYERS_DATA[key]);
 }
 
-function choosePlayer(count, secNDfighter) {
-    if (!secNDfighter) {
-        const all1Players = [...playersSecletion.querySelectorAll("#player1fighters .players2Select")];
-        if (all1Players.map(el => el.classList.contains("selected")).includes(true)) return;
-        let selected1Index = all1Players.findIndex(el => el.classList.contains("active"));
-        if (!selected1Index || selected1Index === -1) selected1Index = 0;
-        selected1Index += count;
-        if (selected1Index < 0) selected1Index = all1Players.length - 1;
-        all1Players.forEach(el => el.classList.remove("active"));
-        if (all1Players.length <= selected1Index) selected1Index = 0;
-        all1Players[selected1Index]?.classList?.add("active");
-        const selected1FighterName = all1Players.filter(el => el.classList.contains("active"))[0].getAttribute("--data-fighterName");
-        changePlayersInfo(PLAYERS_DATA[selected1FighterName]);
-    } else {
-        const all2Players = [...playersSecletion.querySelectorAll("#player2fighters .players2Select")];
-        if (all2Players.map(el => el.classList.contains("selected")).includes(true)) return;
-        let selected2Index = all2Players.findIndex(el => el.classList.contains("active"));
-        if (!selected2Index || selected2Index === -1) selected2Index = 0;
-        selected2Index += count;
-        if (selected2Index < 0) selected2Index = all2Players.length - 1;
-        all2Players.forEach(el => el.classList.remove("active"));
-        if (all2Players.length <= selected2Index) selected2Index = 0;
-        all2Players[selected2Index]?.classList?.add("active");
-        const selected2FighterName = all2Players.filter(el => el.classList.contains("active"))[0].getAttribute("--data-fighterName");
-        changePlayersInfo(PLAYERS_DATA[selected2FighterName], true);
-    }
-}
-
-function changePlayersInfo(playerData, secNDfighter = false) {
-    if (!playerData) return;
-    const playerInfoElement = document.querySelector(`.playersSecletion .player${secNDfighter ? "2" : "1"}Info`);
-
-    const healthSpan = playerInfoElement.querySelector("div:nth-child(1) > span");
-    const powerSpan = playerInfoElement.querySelector("div:nth-child(2) > span");
-    const rangeSpan = playerInfoElement.querySelector("div:nth-child(3) > span");
-    const speedSpan = playerInfoElement.querySelector("div:nth-child(4) > span");
-
-    let gameMaxHealth = 0;
-    let gameMaxPower = 0;
-    let gameMaxRange = 0;
-    let gameMaxSpeed = Infinity;
-
-    for (const ftr in PLAYERS_DATA) {
-        if (gameMaxHealth < PLAYERS_DATA[ftr].health) gameMaxHealth = PLAYERS_DATA[ftr].health;
-        if (gameMaxPower < PLAYERS_DATA[ftr].damage) gameMaxPower = PLAYERS_DATA[ftr].damage;
-        if (gameMaxRange < PLAYERS_DATA[ftr].attackBox.width) gameMaxRange = PLAYERS_DATA[ftr].attackBox.width;
-        if (gameMaxSpeed > PLAYERS_DATA[ftr].giveHitAt) gameMaxSpeed = PLAYERS_DATA[ftr].giveHitAt;
-    }
-
-    healthSpan.style.setProperty('--percent', `${Math.round((100 * playerData.health) / gameMaxHealth)}%`);
-    powerSpan.style.setProperty('--percent', `${Math.round((100 * playerData.damage) / gameMaxPower)}%`);
-    rangeSpan.style.setProperty('--percent', `${Math.round((100 * playerData.attackBox.width) / gameMaxRange)}%`);
-    speedSpan.style.setProperty('--percent', `${Math.round((100 * gameMaxSpeed) / playerData.giveHitAt)}%`);
-}
+// Start Animation
+animate();
+choosePlayer(0);
+choosePlayer(0, true);

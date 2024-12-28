@@ -14,6 +14,7 @@ class Fighter extends Sprite {
      * scale: Number,
      * health: Number,
      * damage: Number,
+     * faceDir: Number,
      * framesMax: Number,
      * sprites: {[key: string]:Sprite}
      * }} param0 
@@ -29,13 +30,15 @@ class Fighter extends Sprite {
         sprites,
         health,
         damage,
+        faceDir = 1,
         attackBox = { offset: { x: 0, y: 0 }, width: undefined, height: undefined },
         giveHitAt
     }) {
         super({ position, imageSrc, scale, framesMax, offset });
         this.velocity = velocity;
         this.lastKey = "";
-        this.width = 50;
+        this.offset = offset;
+        this.width = 80;
         this.height = 150;
         this.attackBox = {
             position: {
@@ -51,6 +54,7 @@ class Fighter extends Sprite {
         this.health = health;
         this.maxHealth = health;
         this.damage = damage;
+        this.faceDir = faceDir;
         this.framesCurrent = 1;
         this.framesElapsed = 0;
         this.framesHold = 5;
@@ -62,6 +66,17 @@ class Fighter extends Sprite {
             sprites[sprite].image = new Image();
             sprites[sprite].image.src = sprites[sprite].imageSrc;
         }
+    }
+
+    draw() {
+        ctx.save();
+        if (this.faceDir === -1) {
+            ctx.translate(this.position.x + this.width / 2, this.position.y + this.height / 2);
+            ctx.scale(-1, 1);
+            ctx.translate(-this.position.x - this.width / 2, -this.position.y - this.height / 2);
+        }
+        super.draw();
+        ctx.restore();
     }
 
     attack() {
@@ -86,12 +101,20 @@ class Fighter extends Sprite {
 
         // ~~ Debugging ~~
         // ctx.fillStyle = "red";
+
         // ctx.fillRect(
-        //     this.attackBox.position.x - this.attackBox.offset.x,
-        //     this.attackBox.position.y,
-        //     this.attackBox.width,
+        //     this.attackBox.position.x - this.attackBox.offset.x + (this.faceDir < 0 ? this.width : 0),
+        //     this.attackBox.position.y + this.attackBox.height,
+        //     this.attackBox.width * this.faceDir,
         //     this.attackBox.height
         // );
+
+        // ctx.fillStyle = "cyan";
+        // ctx.fillRect(
+        //     this.position.x, this.position.y,
+        //     this.width, this.height
+        // );
+        // ~~ End of Debugging ~~
 
         this.position.y += this.velocity.y;
         this.position.x += this.velocity.x;
@@ -100,8 +123,8 @@ class Fighter extends Sprite {
             this.position.x = 0;
         }
 
-        if (this.position.x + this.width > canvas.width - 50) {
-            this.position.x = canvas.width - this.width - 50;
+        if (canvas.width - this.width < this.position.x) {
+            this.position.x = canvas.width - this.width;
         }
 
         if (this.position.y + this.velocity.y < -80) {

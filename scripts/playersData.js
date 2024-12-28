@@ -1,95 +1,97 @@
 const PLAYERS_DATA = {
-    kenji: {
-        name: "Kenji",
-        position: { x: 900, y: 100 },
+    genji: {
+        name: "Genji",
+        position: { x: 80, y: 100 },
         velocity: { x: 0, y: 0 },
-        imageSrc: "./images/kenji/Idle.png",
+        imageSrc: "./images/genji/Idle.png",
+        viewSrc: "./images/genji/View.png",
         framesMax: 4,
-        giveHitAt: 2,
+        giveHitAt: 3,
         scale: 2.5,
         health: 100,
         damage: 13,
         offset: { x: 215, y: 170 },
         sprites: {
             idle: {
-                imageSrc: "./images/kenji/Idle.png",
+                imageSrc: "./images/genji/Idle.png",
                 framesMax: 4
             },
             run: {
-                imageSrc: "./images/kenji/Run.png",
+                imageSrc: "./images/genji/Run.png",
                 framesMax: 8
             },
             jump: {
-                imageSrc: "./images/kenji/Jump.png",
+                imageSrc: "./images/genji/Jump.png",
                 framesMax: 2
             },
             fall: {
-                imageSrc: "./images/kenji/Fall.png",
+                imageSrc: "./images/genji/Fall.png",
                 framesMax: 2
             },
             attack1: {
-                imageSrc: "./images/kenji/Attack1.png",
+                imageSrc: "./images/genji/Attack1.png",
                 framesMax: 4
             },
             takeHit: {
-                imageSrc: "./images/kenji/Take hit.png",
+                imageSrc: "./images/genji/Take hit.png",
                 framesMax: 3
             },
             death: {
-                imageSrc: "./images/kenji/Death.png",
+                imageSrc: "./images/genji/Death.png",
                 framesMax: 7
             }
         },
         attackBox: {
-            offset: { x: -170, y: 50 },
-            width: 170,
+            offset: { x: 0, y: 50 },
+            width: 220,
             height: 50
         }
     },
-    samuraiMack: {
-        name: "Samurai Mack",
+    samurai: {
+        name: "Samurai",
         position: { x: 80, y: 0 },
         velocity: { x: 0, y: 0 },
-        imageSrc: "./images/samuraiMack/Idle.png",
+        imageSrc: "./images/samurai/Idle.png",
+        viewSrc: "./images/samurai/View.png",
         framesMax: 8,
         giveHitAt: 5,
         scale: 2.5,
         health: 110,
         damage: 15,
-        offset: { x: 215, y: 155 },
+        offset: { x: 205, y: 155 },
         sprites: {
             idle: {
-                imageSrc: "./images/samuraiMack/Idle.png",
+                imageSrc: "./images/samurai/Idle.png",
                 framesMax: 8
             },
             run: {
-                imageSrc: "./images/samuraiMack/Run.png",
+                imageSrc: "./images/samurai/Run.png",
                 framesMax: 8
             },
             jump: {
-                imageSrc: "./images/samuraiMack/Jump.png",
+                imageSrc: "./images/samurai/Jump.png",
                 framesMax: 2
             },
             fall: {
-                imageSrc: "./images/samuraiMack/Fall.png",
+                imageSrc: "./images/samurai/Fall.png",
                 framesMax: 2
             },
             attack1: {
-                imageSrc: "./images/samuraiMack/Attack1.png",
+                imageSrc: "./images/samurai/Attack1.png",
                 framesMax: 6
             },
             takeHit: {
-                imageSrc: "./images/samuraiMack/Take Hit - white silhouette.png",
+                imageSrc: "./images/samurai/Take Hit - white silhouette.png",
                 framesMax: 4
             },
             death: {
-                imageSrc: "./images/samuraiMack/Death.png",
+                imageSrc: "./images/samurai/Death.png",
                 framesMax: 6
             }
         },
         attackBox: {
-            offset: { x: 80, y: 50 },
-            width: 170,
+            offset: { x: 0, y: 50 },
+            width: 230,
             height: 50
         }
     },
@@ -98,12 +100,13 @@ const PLAYERS_DATA = {
         position: { x: 80, y: 0 },
         velocity: { x: 0, y: 0 },
         imageSrc: "./images/shifu/Idle.png",
+        viewSrc: "./images/shifu/View.png",
         framesMax: 8,
         giveHitAt: 5,
         scale: 2.5,
         health: 150,
         damage: 10,
-        offset: { x: 130, y: 55 },
+        offset: { x: 125, y: 55 },
         sprites: {
             idle: {
                 imageSrc: "./images/shifu/Idle.png",
@@ -140,21 +143,22 @@ const PLAYERS_DATA = {
             height: 50
         }
     },
-    huntress1: {
+    huntress: {
         name: "Huntress",
         position: { x: 80, y: 0 },
         velocity: { x: 0, y: 0 },
         imageSrc: "./images/huntress/Idle.png",
-        framesMax: 8,
+        viewSrc: "./images/huntress/View.png",
+        framesMax: 10,
         giveHitAt: 4,
-        scale: 2.8,
-        health: 100,
+        scale: 2.65,
+        health: 80,
         damage: 12,
-        offset: { x: 150, y: 120 },
+        offset: { x: 90, y: 30 },
         sprites: {
             idle: {
                 imageSrc: "./images/huntress/Idle.png",
-                framesMax: 8
+                framesMax: 10
             },
             run: {
                 imageSrc: "./images/huntress/Run.png",
@@ -169,62 +173,15 @@ const PLAYERS_DATA = {
                 framesMax: 2
             },
             attack1: {
-                imageSrc: "./images/huntress/Attack1.png",
-                framesMax: 5
+                imageSrc: "./images/huntress/Attack.png",
+                framesMax: 6
             },
             takeHit: {
-                imageSrc: "./images/huntress/Take Hit.png",
+                imageSrc: "./images/huntress/Get Hit.png",
                 framesMax: 3
             },
             death: {
                 imageSrc: "./images/huntress/Death.png",
-                framesMax: 8
-            }
-        },
-        attackBox: {
-            offset: { x: 10, y: 50 },
-            width: 175,
-            height: 50
-        }
-    },
-    huntress2: {
-        name: "Huntress 2",
-        position: { x: 80, y: 0 },
-        velocity: { x: 0, y: 0 },
-        imageSrc: "./images/huntress2/Idle.png",
-        framesMax: 10,
-        giveHitAt: 4,
-        scale: 2.65,
-        health: 80,
-        damage: 12,
-        offset: { x: 100, y: 30 },
-        sprites: {
-            idle: {
-                imageSrc: "./images/huntress2/Idle.png",
-                framesMax: 10
-            },
-            run: {
-                imageSrc: "./images/huntress2/Run.png",
-                framesMax: 8
-            },
-            jump: {
-                imageSrc: "./images/huntress2/Jump.png",
-                framesMax: 2
-            },
-            fall: {
-                imageSrc: "./images/huntress2/Fall.png",
-                framesMax: 2
-            },
-            attack1: {
-                imageSrc: "./images/huntress2/Attack.png",
-                framesMax: 6
-            },
-            takeHit: {
-                imageSrc: "./images/huntress2/Get Hit.png",
-                framesMax: 3
-            },
-            death: {
-                imageSrc: "./images/huntress2/Death.png",
                 framesMax: 10
             }
         },
@@ -233,5 +190,197 @@ const PLAYERS_DATA = {
             width: 350,
             height: 50
         }
-    }
+    },
+    evilWizard: {
+        name: "Evil Wizard",
+        position: { x: 80, y: 0 },
+        velocity: { x: 0, y: 0 },
+        imageSrc: "./images/evilWizard/Idle.png",
+        viewSrc: "./images/evilWizard/View.png",
+        framesMax: 10,
+        giveHitAt: 10,
+        scale: 2.5,
+        health: 80,
+        damage: 20,
+        offset: { x: 140, y: 90 },
+        sprites: {
+            idle: {
+                imageSrc: "./images/evilWizard/Idle.png",
+                framesMax: 10
+            },
+            run: {
+                imageSrc: "./images/evilWizard/Run.png",
+                framesMax: 8
+            },
+            jump: {
+                imageSrc: "./images/evilWizard/Jump.png",
+                framesMax: 3
+            },
+            fall: {
+                imageSrc: "./images/evilWizard/Fall.png",
+                framesMax: 3
+            },
+            attack1: {
+                imageSrc: "./images/evilWizard/Attack.png",
+                framesMax: 13
+            },
+            takeHit: {
+                imageSrc: "./images/evilWizard/Get hit.png",
+                framesMax: 3
+            },
+            death: {
+                imageSrc: "./images/evilWizard/Death.png",
+                framesMax: 18
+            }
+        },
+        attackBox: {
+            offset: { x: 0, y: 50 },
+            width: 175,
+            height: 50
+        }
+    },
+    halloweenWizard: {
+        name: "Halloween Wizard",
+        position: { x: 80, y: 0 },
+        velocity: { x: 0, y: 0 },
+        imageSrc: "./images/halloweenWizard/Idle.png",
+        viewSrc: "./images/halloweenWizard/View.png",
+        framesMax: 8,
+        giveHitAt: 5,
+        scale: 2.3,
+        health: 110,
+        damage: 10,
+        offset: { x: 253, y: 235 },
+        sprites: {
+            idle: {
+                imageSrc: "./images/halloweenWizard/Idle.png",
+                framesMax: 8
+            },
+            run: {
+                imageSrc: "./images/halloweenWizard/Run.png",
+                framesMax: 8
+            },
+            jump: {
+                imageSrc: "./images/halloweenWizard/Jump.png",
+                framesMax: 2
+            },
+            fall: {
+                imageSrc: "./images/halloweenWizard/Fall.png",
+                framesMax: 2
+            },
+            attack1: {
+                imageSrc: "./images/halloweenWizard/Attack1.png",
+                framesMax: 8
+            },
+            takeHit: {
+                imageSrc: "./images/halloweenWizard/Take hit.png",
+                framesMax: 3
+            },
+            death: {
+                imageSrc: "./images/halloweenWizard/Death.png",
+                framesMax: 7
+            }
+        },
+        attackBox: {
+            offset: { x: 0, y: 50 },
+            width: 220,
+            height: 50
+        }
+    },
+    wizard: {
+        name: "Wizard",
+        position: { x: 80, y: 0 },
+        velocity: { x: 0, y: 0 },
+        imageSrc: "./images/wizard/Idle.png",
+        viewSrc: "./images/wizard/View.png",
+        framesMax: 6,
+        giveHitAt: 6,
+        scale: 1.7,
+        health: 105,
+        damage: 15,
+        offset: { x: 140, y: 90 },
+        sprites: {
+            idle: {
+                imageSrc: "./images/wizard/Idle.png",
+                framesMax: 6
+            },
+            run: {
+                imageSrc: "./images/wizard/Run.png",
+                framesMax: 8
+            },
+            jump: {
+                imageSrc: "./images/wizard/Jump.png",
+                framesMax: 2
+            },
+            fall: {
+                imageSrc: "./images/wizard/Fall.png",
+                framesMax: 2
+            },
+            attack1: {
+                imageSrc: "./images/wizard/Attack2.png",
+                framesMax: 8
+            },
+            takeHit: {
+                imageSrc: "./images/wizard/Hit.png",
+                framesMax: 4
+            },
+            death: {
+                imageSrc: "./images/wizard/Death.png",
+                framesMax: 7
+            }
+        },
+        attackBox: {
+            offset: { x: 0, y: 50 },
+            width: 180,
+            height: 50
+        }
+    },
+    warrior: {
+        name: "Warrior",
+        position: { x: 80, y: 0 },
+        velocity: { x: 0, y: 0 },
+        imageSrc: "./images/warrior/Idle.png",
+        viewSrc: "./images/warrior/View.png",
+        framesMax: 10,
+        giveHitAt: 5,
+        scale: 2.8,
+        health: 150,
+        damage: 10,
+        offset: { x: 190, y: 133 },
+        sprites: {
+            idle: {
+                imageSrc: "./images/warrior/Idle.png",
+                framesMax: 10
+            },
+            run: {
+                imageSrc: "./images/warrior/Run.png",
+                framesMax: 8
+            },
+            jump: {
+                imageSrc: "./images/warrior/Jump.png",
+                framesMax: 3
+            },
+            fall: {
+                imageSrc: "./images/warrior/Fall.png",
+                framesMax: 3
+            },
+            attack1: {
+                imageSrc: "./images/warrior/Attack1.png",
+                framesMax: 7
+            },
+            takeHit: {
+                imageSrc: "./images/warrior/Take hit.png",
+                framesMax: 3
+            },
+            death: {
+                imageSrc: "./images/warrior/Death.png",
+                framesMax: 7
+            }
+        },
+        attackBox: {
+            offset: { x: 0, y: 50 },
+            width: 155,
+            height: 50
+        }
+    },
 };

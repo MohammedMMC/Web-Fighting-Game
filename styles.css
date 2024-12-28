@@ -56,6 +56,7 @@ section.controls div p span:nth-child(1) {
 .container {
   position: relative;
   display: inline-block;
+  overflow: hidden;
 }
 
 .gamestatus {
@@ -245,8 +246,14 @@ section.controls div p span:nth-child(1) {
   gap: 15px;
 }
 
-.playersSecletion div.playersSelectionContainer > div:nth-of-type(2) > div {
+.playersSecletion div.playersSelectionContainer > div > div > div { 
+  display: flex;
+  flex-direction: column;
   justify-content: end;
+}
+
+.playersSecletion div.playersSelectionContainer > div:nth-of-type(2) > div {
+  flex-direction: row-reverse;
 }
 
 .playersSecletion div.playersSelectionContainer > div:nth-of-type(2) h3 {
@@ -254,18 +261,37 @@ section.controls div p span:nth-child(1) {
   text-align: end;
 }
 
+#player2fighters .players2Select {
+  position: relative;
+}
+
+#player2fighters .players2Select::before {
+  transform: rotateY(180deg);
+}
+
 .players2Select {
-  background-image: var(--fighterViewURL);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
+  position: relative;
   --size: 100px;
   height: var(--size);
   width: var(--size);
   font-size: xx-small;
   text-align: center;
   border-radius: 10px;
-  padding: 5px;
+  padding: 10px;
+}
+
+.players2Select::before {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  background-image: var(--fighterViewURL);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
 }
 
 .players2Select.active:not(.selected) {
