@@ -246,7 +246,7 @@ section.controls div p span:nth-child(1) {
   gap: 15px;
 }
 
-.playersSecletion div.playersSelectionContainer > div > div > div { 
+.playersSecletion div.playersSelectionContainer > div > div > div {
   display: flex;
   flex-direction: column;
   justify-content: end;
@@ -322,6 +322,11 @@ section#bigScreensWarn {
   align-items: center;
   justify-content: center;
   padding: 1cm;
+}
+
+section#bigScreensWarn a {
+  color: rgb(168, 198, 238);
+  font-size: small;
 }
 
 section#bigScreensWarn * {
